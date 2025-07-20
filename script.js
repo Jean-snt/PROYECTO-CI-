@@ -1,5 +1,5 @@
 document.getElementById("conversor-form").addEventListener("submit", function (e) {
-  
+
   const valorInput = document.getElementById("temperatura").value;
   const resultadoDiv = document.getElementById("resultado");
 
@@ -12,6 +12,7 @@ document.getElementById("conversor-form").addEventListener("submit", function (e
     resultadoDiv.textContent = "Por favor, ingresa un número válido.";
     return;
   }
+  
 
   if (de === a) {
     resultadoDiv.textContent = `El valor convertido es el mismo: ${valor}°`;
