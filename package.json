@@ -1,0 +1,15 @@
+{
+  "name": "proyecto-ci--main",
+  "version": "1.0.0",
+  "description": "Historia de Usuario 1 – Conversión entre temperaturas",
+  "type": "module",
+  "main": "script.js",
+  "scripts": {
+  "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+},
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^30.0.4"
+  }
+}
