@@ -24,6 +24,7 @@ h1 {
 }
 
 /* Animación de latido suave */
+
 @keyframes heartbeat {
   0%, 100% {
     transform: scale(1);
