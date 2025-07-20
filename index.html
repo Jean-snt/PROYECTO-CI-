@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conversor de Temperatura</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  
+  <!-- TÍTULO -->
+  <h1>Conversor de Temperatura</h1>
+
+  <!-- FORMULARIO -->
+  <form id="conversor-form">
+    
+    <!-- Campo de entrada de temperatura -->
+    <label for="temperatura">Temperatura:</label>
+    <input type="number" id="temperatura" required />
+
+    <!-- Selección de unidad de origen -->
+    <label for="de-unidad">De:</label>
+    <select id="de-unidad">
+      <option value="celsius">Celsius</option>
+      <option value="fahrenheit">Fahrenheit</option>
+      <option value="kelvin">Kelvin</option>
+    </select>
+
+    <!-- Selección de unidad de destino -->
+    <label for="a-unidad">A:</label>
+    <select id="a-unidad">
+      <option value="celsius">Celsius</option>
+      <option value="fahrenheit">Fahrenheit</option>
+      <option value="kelvin">Kelvin</option>
+    </select>
+
+    <!-- Botón para convertir -->
+    <button type="submit">Convertir</button>
+
+     <!-- Resultado de la conversión -->
+  <p id="resultado"></p>
+  </form>
+
+  
+
+  <!-- SCRIPT -->
+  <script>
+    document.getElementById("conversor-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const valor = parseFloat(document.getElementById("temperatura").value);
+      const de = document.getElementById("de-unidad").value;
+      const a = document.getElementById("a-unidad").value;
+      const resultadoDiv = document.getElementById("resultado");
+
+      if (isNaN(valor)) {
+        resultadoDiv.textContent = "Por favor, ingresa un número válido.";
+        return;
+      }
+
+      if (de === a) {
+        resultadoDiv.textContent = `El valor convertido es el mismo: ${valor}°`;
+        return;
+      }
+
+      let convertido;
+
+      if (de === "celsius") {
+        convertido = (a === "fahrenheit") ? (valor * 9/5) + 32 : valor + 273.15;
+      } else if (de === "fahrenheit") {
+        convertido = (a === "celsius") ? (valor - 32) * 5/9 : ((valor - 32) * 5/9) + 273.15;
+      } else if (de === "kelvin") {
+        convertido = (a === "celsius") ? valor - 273.15 : ((valor - 273.15) * 9/5) + 32;
+      }
+
+      resultadoDiv.textContent = `Resultado: ${convertido.toFixed(2)} °${a.charAt(0).toUpperCase()}`;
+    });
+  </script>
+
+</body>
+</html>
