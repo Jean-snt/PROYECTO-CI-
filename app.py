@@ -17,6 +17,14 @@ def script():
 def style():
     return send_from_directory('.', 'style.css')
 
+@app.route('/test.js')
+def test_js():
+    return send_from_directory('.', 'test.js')
+
+@app.route('/validar.js')
+def validar_js():
+    return send_from_directory('.', 'validar.js')
+
 @app.route('/convertir', methods=['POST'])
 def convertir_grados():
     datos = request.json
