@@ -1,14 +1,12 @@
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 
-
 app = Flask(__name__)
 CORS(app)
 
 @app.route('/')
 def index():
     return send_from_directory('.', 'index.html')
-
 
 @app.route('/script.js')
 def script():
@@ -18,38 +16,45 @@ def script():
 def style():
     return send_from_directory('.', 'style.css')
 
-def convertir(valor, origen, destino):
-    conversiones = {
-        ('celsius', 'fahrenheit'): lambda v: v * 9/5 + 32,
-        ('fahrenheit', 'celsius'): lambda v: (v - 32) * 5/9,
-        ('celsius', 'celsius'): lambda v: v,
-        ('fahrenheit', 'fahrenheit'): lambda v: v,
-    }
-    clave = (origen, destino)
-    if clave in conversiones:
-        return round(conversiones[clave](valor), 2)
-    return None
-
 @app.route('/convertir', methods=['POST'])
 def convertir_grados():
     datos = request.json
-    valor = datos.get('valor')
-    origen = datos.get('origen')
-    destino = datos.get('destino')
 
-    if valor is None or origen is None or destino is None:
+    if not datos:
+        return jsonify({"error": "No se recibieron datos"}), 400
+
+    valor = datos.get('valor')
+    unidad_origen = datos.get('origen')
+    unidad_destino = datos.get('destino')
+
+    if valor is None or unidad_origen is None or unidad_destino is None:
         return jsonify({"error": "Faltan datos"}), 400
 
     try:
         valor = float(valor)
-    except ValueError:
-        return jsonify({"error": "El valor debe ser numérico"}), 400
+    except:
+        return jsonify({"error": "El valor debe ser un número"}), 400
 
-    resultado = convertir(valor, origen, destino)
-    if resultado is None:
-        return jsonify({"error": "Conversión no soportada"}), 400
+    resultado = None
 
-    return jsonify({"resultado": resultado}), 200
+    if unidad_origen == 'celsius':
+        if unidad_destino == 'fahrenheit':
+            resultado = valor * 9/5 + 32
+        elif unidad_destino == 'celsius':
+            resultado = valor
+        else:
+            return jsonify({"error": "Conversión no válida"}), 400
+    elif unidad_origen == 'fahrenheit':
+        if unidad_destino == 'celsius':
+            resultado = (valor - 32) * 5/9
+        elif unidad_destino == 'fahrenheit':
+            resultado = valor
+        else:
+            return jsonify({"error": "Conversión no válida"}), 400
+    else:
+        return jsonify({"error": "Unidad de origen no válida"}), 400
+
+    return jsonify({"resultado": round(resultado, 2)}), 200
 
 if __name__ == '__main__':
     app.run(debug=True)

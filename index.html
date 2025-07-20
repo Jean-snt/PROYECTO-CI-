@@ -2,34 +2,48 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Conversor de Temperatura</title>
-  
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <!-- TÍTULO -->
   <h1>Conversor de Temperatura</h1>
+
+  <!-- FORMULARIO -->
   <form id="conversor-form">
-    <label>Temperatura:</label>
-    <input type="number" id="temperatura" required />
     
-    <label>De:</label>
+    <!-- Campo de entrada de temperatura -->
+    <label for="temperatura">Temperatura:</label>
+    <input type="number" id="temperatura" required />
+
+    <!-- Selección de unidad de origen -->
+    <label for="de-unidad">De:</label>
     <select id="de-unidad">
       <option value="celsius">Celsius</option>
       <option value="fahrenheit">Fahrenheit</option>
       <option value="kelvin">Kelvin</option>
     </select>
 
-    <label>A:</label>
+    <!-- Selección de unidad de destino -->
+    <label for="a-unidad">A:</label>
     <select id="a-unidad">
       <option value="celsius">Celsius</option>
       <option value="fahrenheit">Fahrenheit</option>
       <option value="kelvin">Kelvin</option>
     </select>
 
+    <!-- Botón para convertir -->
     <button type="submit">Convertir</button>
+
+     <!-- Resultado de la conversión -->
+  <p id="resultado"></p>
   </form>
 
-  <p id="resultado"></p>
+  
 
+  <!-- SCRIPT -->
   <script>
     document.getElementById("conversor-form").addEventListener("submit", function (e) {
       e.preventDefault();
@@ -62,5 +76,6 @@
       resultadoDiv.textContent = `Resultado: ${convertido.toFixed(2)} °${a.charAt(0).toUpperCase()}`;
     });
   </script>
+
 </body>
 </html>
