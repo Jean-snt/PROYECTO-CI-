@@ -1,4 +1,5 @@
 document.getElementById("conversor-form").addEventListener("submit", function (e) {
+  
   const valorInput = document.getElementById("temperatura").value;
   const resultadoDiv = document.getElementById("resultado");
 
