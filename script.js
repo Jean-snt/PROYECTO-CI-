@@ -14,6 +14,7 @@ document.getElementById("conversor-form").addEventListener("submit", function (e
   if (unidadOrigen === unidadDestino) {
     mostrarResultado(`El valor convertido es el mismo: ${valor}°`);
     return;
+    
   }
 
   const convertido = convertirTemperatura(valor, unidadOrigen, unidadDestino);
