@@ -1,4 +1,5 @@
 /* 1. Estilos generales del cuerpo */
+
 body {
   font-family: 'Avenir', 'Arial', sans-serif;
   background: linear-gradient(135deg, #6596f0, #7d85aa);
@@ -10,11 +11,12 @@ body {
   margin: 0;
   padding: 20px;
   color: #333;
-  
+
 }
 
 
 /* 2. Título con animación de latido */
+
 h1 {
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -23,6 +25,7 @@ h1 {
 }
 
 /* Animación de latido suave */
+
 @keyframes heartbeat {
   0%, 100% {
     transform: scale(1);
@@ -37,6 +40,7 @@ h1 {
 
 
 /* 3. Estilos del formulario */
+
 #conversor-form {
   background: rgba(255, 255, 255, 0.95);
   padding: 30px;
